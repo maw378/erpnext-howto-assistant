@@ -1,0 +1,129 @@
+{
+ "actions": [],
+ "creation": "2026-09-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "column_break_status",
+  "daily_request_limit",
+  "visibility_section",
+  "visible_to",
+  "column_break_visibility",
+  "allowed_users",
+  "model_section",
+  "openai_api_key",
+  "model",
+  "column_break_model",
+  "max_tokens",
+  "temperature"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "description": "Turn the chat assistant off for everyone without removing the API key.",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "column_break_status",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "50",
+   "description": "Per-user, per-day cap on questions, to keep OpenAI usage predictable. 0 = unlimited.",
+   "fieldname": "daily_request_limit",
+   "fieldtype": "Int",
+   "label": "Daily Request Limit (per user)"
+  },
+  {
+   "fieldname": "visibility_section",
+   "fieldtype": "Section Break",
+   "label": "Visibility"
+  },
+  {
+   "default": "All Users",
+   "description": "Who can see and use the floating How-To Assistant button and page.",
+   "fieldname": "visible_to",
+   "fieldtype": "Select",
+   "label": "Visible To",
+   "options": "All Users\nOnly Selected Users",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_visibility",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.visible_to==\"Only Selected Users\"",
+   "description": "Administrator always has access, to be able to manage this page regardless.",
+   "fieldname": "allowed_users",
+   "fieldtype": "Table MultiSelect",
+   "label": "Allowed Users",
+   "options": "AI How To Assistant Allowed User"
+  },
+  {
+   "fieldname": "model_section",
+   "fieldtype": "Section Break",
+   "label": "OpenAI Connection"
+  },
+  {
+   "description": "Stored encrypted. Only used server-side to call the OpenAI Chat Completions API - never sent to the browser.",
+   "fieldname": "openai_api_key",
+   "fieldtype": "Password",
+   "label": "OpenAI API Key"
+  },
+  {
+   "default": "gpt-4o-mini",
+   "description": "Low-cost model is sufficient - this assistant only explains steps, it never sees or reasons over real data.",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_model",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "500",
+   "description": "Upper bound on the answer length OpenAI is allowed to generate, per question.",
+   "fieldname": "max_tokens",
+   "fieldtype": "Int",
+   "label": "Max Answer Tokens",
+   "reqd": 1
+  },
+  {
+   "default": "0.2",
+   "description": "Lower = more consistent, literal step-by-step answers. Keep this low for a how-to guide.",
+   "fieldname": "temperature",
+   "fieldtype": "Float",
+   "label": "Temperature",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-09-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERPNext HowTo Assistant",
+ "name": "AI How-To Assistant Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

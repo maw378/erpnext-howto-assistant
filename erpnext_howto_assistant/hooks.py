@@ -25,8 +25,13 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/erpnext_howto_assistant/css/erpnext_howto_assistant.css"
-# app_include_js = "/assets/erpnext_howto_assistant/js/erpnext_howto_assistant.js"
+#
+# Frappe only cache-busts filenames containing ".bundle." (its esbuild
+# manifest marker, see bundled_asset() in frappe/utils/jinja_globals.py) -
+# these two are plain static paths, so browsers can cache them indefinitely
+# across edits. Bump the ?v= query manually whenever either file changes.
+app_include_css = "/assets/erpnext_howto_assistant/css/howto_widget.css?v=1"
+app_include_js = "/assets/erpnext_howto_assistant/js/howto_widget.js?v=1"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/erpnext_howto_assistant/css/erpnext_howto_assistant.css"
@@ -47,6 +52,13 @@ app_license = "mit"
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+
+# Boot session
+# ------------
+# adds erpnext_howto_assistant.utils.howto_assistant.extend_bootinfo's return
+# value to frappe.boot, so howto_widget.js can decide to mount the floating
+# button without an extra round trip on every page load
+extend_bootinfo = "erpnext_howto_assistant.utils.howto_assistant.extend_bootinfo"
 
 # Svg Icons
 # ------------------
