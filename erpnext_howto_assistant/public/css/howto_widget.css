@@ -177,6 +177,22 @@
 	right: 0;
 }
 
+/* Arabic (RTL) desk: Frappe sets <html dir="rtl">. Put the button and the drawer on
+   the left so they sit with the rest of the mirrored UI. */
+[dir="rtl"] #howto-fab {
+	right: auto;
+	left: 24px;
+}
+[dir="rtl"] .howto-drawer {
+	right: auto;
+	left: -420px;
+	box-shadow: 2px 0 16px rgba(0, 0, 0, 0.3);
+	transition: left 0.25s ease;
+}
+[dir="rtl"] .howto-drawer.open {
+	left: 0;
+}
+
 .howto-drawer-header {
 	display: flex;
 	justify-content: space-between;
